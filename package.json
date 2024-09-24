@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Compares two configuration files and shows a difference.",
-  "main": "index.js",
+  "main": "src/gendiff.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "gendiff": "gendiff.js"
+    "gendiff": "bin/gendiff.js"
   },
   "author": "msvoronov",
   "license": "ISC",
