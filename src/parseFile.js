@@ -1,10 +1,12 @@
 import { readFileSync } from 'fs';
+import path from 'path';
 import { cwd } from 'process';
-import * as path from 'path';
+
+const getPath = (fileName) => path.resolve(cwd(), 'src/', `./${fileName}`);
 
 const parseFile = (fileName) => {
-  const pathToFile = path.resolve(cwd(), 'src/', `./${fileName}`);
-  const file = readFileSync(pathToFile);
+  const filePath = getPath(fileName);
+  const file = readFileSync(filePath);
   const fileContents = JSON.parse(file); // Формат данных определяйте на основе расширения файла !!!
   return fileContents;
 };

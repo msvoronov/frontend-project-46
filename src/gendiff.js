@@ -1,5 +1,6 @@
 import { program } from 'commander';
-import parseFile from './parcer.js';
+import parseFile from './parseFile.js';
+import convertObjToStr from './convertObjToStr.js';
 import getDifference from './getDifference.js';
 
 program
@@ -11,7 +12,7 @@ program
   .argument('<filepath1>', 'path to first file')
   .argument('<filepath2>', 'path to second file')
   .action(() => {
-    const { args } = program; // получаем массив сторк - переданных аргументов
+    const { args } = program; // получаем массив строк - переданных аргументов (имен файлов)
     const objects = args.map(parseFile); // преобразуем в массив объектов
     const sortedObjects = objects
       .map((obj) => Object.entries(obj).sort()) // разибраем на подмассивы и сортируем
@@ -19,7 +20,7 @@ program
     const [obj1, obj2] = sortedObjects;
 
     const difference = getDifference(obj1, obj2);
-    console.log(difference);
+    console.log(convertObjToStr(difference));
 
     // Объект { название: 'значение' } с переданными опциями
     // const options = program.opts();
