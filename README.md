@@ -1,7 +1,10 @@
-[![Actions Status](https://github.com/msvoronov/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/msvoronov/frontend-project-46/actions)
-
 # gendiff
 
+[![Actions Status](https://github.com/msvoronov/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/msvoronov/frontend-project-46/actions)
+[![my-check](https://github.com/msvoronov/frontend-project-46/actions/workflows/my-check.yml/badge.svg)](https://github.com/msvoronov/frontend-project-46/actions/workflows/my-check.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ff96eb177a577d3c768a/maintainability)](https://codeclimate.com/github/msvoronov/frontend-project-46/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ff96eb177a577d3c768a/test_coverage)](https://codeclimate.com/github/msvoronov/frontend-project-46/test_coverage)
+    
 The utility compares two configuration files and shows a difference.
 
 ## Setup
