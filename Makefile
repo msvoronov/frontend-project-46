@@ -14,6 +14,6 @@ test-coverage:
 	npm test -- --coverage
 
 run:
-	node bin/gendiff.js file1.json file2.json
+	node bin/gendiff.js file1.json file2.yml
 
 .PHONY: test

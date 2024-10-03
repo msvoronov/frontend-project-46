@@ -26,6 +26,6 @@ gendiff [options] <filepath1> <filepath2>
 ```
 
 ### demo
-[![asciicast](https://asciinema.org/a/5nh4ghVhNT8wo4hRcYJjrq2xQ.svg)](https://asciinema.org/a/5nh4ghVhNT8wo4hRcYJjrq2xQ)
+[![asciicast](https://asciinema.org/a/678754.svg)](https://asciinema.org/a/678754)
 
 This utility is developed by Mikhail Voronov as educational project in Hexlet programming school.
