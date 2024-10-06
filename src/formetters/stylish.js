@@ -22,7 +22,7 @@ const getStylish = (object) => {
       return `${acc}\n${identKey}${key}: {${inner(value, depth + 1)}\n${indentBrace}}`;
     }, '');
   };
-  return `\n{${inner(object, 1)}\n}`;
+  return `{${inner(object, 1)}\n}`;
 };
 
 export default getStylish;
