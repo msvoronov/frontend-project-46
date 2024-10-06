@@ -55,7 +55,7 @@ const getPlain = (object) => {
       default:
         throw new Error(`Unknown status: '${status}'!`);
     }
-  }, '');
+  }, '').trim();
 };
 
 export default getPlain;
