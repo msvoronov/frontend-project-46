@@ -53,7 +53,7 @@ const getPlain = (object) => {
       case 'updated':
         return `${acc}\nProperty '${el[0]}' was updated. From ${el[2]} to ${el[3]}`;
       default:
-        throw new Error(`Unknown status: ${status}!`);
+        throw new Error(`Unknown status: '${status}'!`);
     }
   }, '');
 };

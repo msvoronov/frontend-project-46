@@ -21,3 +21,9 @@ test('plain', () => {
   const plain = fs.readFileSync(getFixturePath('resultPlain.txt'), 'utf-8');
   expect(diff).toEqual(plain);
 });
+
+test('json', () => {
+  const diff = genDiff(filepath1, filepath2, 'json');
+  const json = fs.readFileSync(getFixturePath('resultJSON.json'), 'utf-8');
+  expect(diff).toEqual(json);
+});
