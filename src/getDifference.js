@@ -2,7 +2,7 @@ import path from 'path';
 import { cwd } from 'process';
 import parseFile from './parseFile.js';
 
-const getAbsPath = (fileName) => path.resolve(cwd(), '__fixtures__/', `./${fileName}`);
+const getAbsPath = (fileName) => path.resolve(cwd(), fileName);
 
 const getDifference = (filepath1, filepath2) => {
   const object1 = parseFile(getAbsPath(filepath1));
