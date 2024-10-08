@@ -4,31 +4,53 @@ import parseFile from './parseFile.js';
 
 const getAbsPath = (fileName) => path.resolve(cwd(), fileName);
 
+const sortAscending = (arr) => arr.reduce((acc, el) => [
+  ...acc.filter((n) => n <= el),
+  el,
+  ...acc.filter((n) => n > el),
+], []);
+
+const makeTree = (obj1, obj2) => {
+  const allKeys = sortAscending(Object.keys({ ...obj1, ...obj2 }));
+  return allKeys.map((key) => {
+    if (obj1[key] instanceof Object && obj2[key] instanceof Object) { // значения - объекты
+      return {
+        key,
+        status: 'hasChildren',
+        children: makeTree(obj1[key], obj2[key]),
+      };
+    } if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) { // есть только в 1
+      return {
+        key,
+        status: 'deleted',
+        value: obj1[key],
+      };
+    } if (!Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) { // есть только во 2
+      return {
+        key,
+        status: 'added',
+        value: obj2[key],
+      };
+    } if (obj1[key] !== obj2[key]) { // есть в обоих, но разные
+      return {
+        key,
+        status: 'changed',
+        valueFrom: obj1[key],
+        valueTo: obj2[key],
+      };
+    } // if (obj1[key] === obj2[key]) - есть в обоих и они одинаковые
+    return {
+      key,
+      status: 'unchanged',
+      value: obj1[key],
+    };
+  });
+};
+
 const getDifference = (filepath1, filepath2) => {
   const object1 = parseFile(getAbsPath(filepath1));
   const object2 = parseFile(getAbsPath(filepath2));
-
-  const inner = (obj1, obj2) => {
-    const allKeys = Object.keys({ ...obj1, ...obj2 }).sort();
-    const difference = allKeys.reduce((acc, key) => {
-      const result = {};
-      if (obj1[key] instanceof Object && obj2[key] instanceof Object) { // значения - объекты
-        result[`  ${key}`] = inner(obj1[key], obj2[key]);
-      } else if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) { // есть только в 1
-        result[`- ${key}`] = obj1[key];
-      } else if (!Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) { // есть только во 2
-        result[`+ ${key}`] = obj2[key];
-      } else if (obj1[key] !== obj2[key]) { // есть в обоих, но разные
-        result[`- ${key}`] = obj1[key];
-        result[`+ ${key}`] = obj2[key];
-      } else { // if (obj1[key] === obj2[key]) - есть в обоих и они одинаковые
-        result[`  ${key}`] = obj1[key];
-      }
-      return { ...acc, ...result };
-    }, {});
-    return difference;
-  };
-  return inner(object1, object2);
+  return makeTree(object1, object2);
 };
 
 export default getDifference;
