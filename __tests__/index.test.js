@@ -30,3 +30,7 @@ test('json', () => {
   const json = fs.readFileSync(getFixturePath('resultJSON.json'), 'utf-8');
   expect(diff).toEqual(json);
 });
+
+test('wrong format', () => {
+  expect((() => genDiff(filepath1, filepath2, 'wrong'))).toThrow();
+});
