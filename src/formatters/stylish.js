@@ -21,7 +21,8 @@ const stringifyValue = (value, depth) => {
 const getStylish = (treeOrig) => {
   const inner = (tree, depth) => tree.map((node) => {
     const { key, status } = node;
-    const indentKey = getIndent(depth, 2);
+    const offsetKey = 2;
+    const indentKey = getIndent(depth, offsetKey);
     const indentBrace = getIndent(depth);
 
     switch (status) {
