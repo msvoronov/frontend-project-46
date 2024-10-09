@@ -13,22 +13,14 @@ const fileName2 = 'file2.yml';
 const filepath1 = getFixturePath(fileName1);
 const filepath2 = getFixturePath(fileName2);
 
-test('stylish', () => {
-  const diff = genDiff(filepath1, filepath2);
-  const stylish = fs.readFileSync(getFixturePath('resultStylish.txt'), 'utf-8');
-  expect(diff).toEqual(stylish);
-});
-
-test('plain', () => {
-  const diff = genDiff(filepath1, filepath2, 'plain');
-  const plain = fs.readFileSync(getFixturePath('resultPlain.txt'), 'utf-8');
-  expect(diff).toEqual(plain);
-});
-
-test('json', () => {
-  const diff = genDiff(filepath1, filepath2, 'json');
-  const json = fs.readFileSync(getFixturePath('resultJSON.json'), 'utf-8');
-  expect(diff).toEqual(json);
+test.each([
+  ['stylish', 'resultStylish.txt'],
+  ['plain', 'resultPlain.txt'],
+  ['json', 'resultJSON.json'],
+])('%s', (format, expectedOutput) => {
+  const diff = genDiff(filepath1, filepath2, format);
+  const result = fs.readFileSync(getFixturePath(expectedOutput), 'utf-8');
+  expect(diff).toEqual(result);
 });
 
 test('wrong format', () => {
