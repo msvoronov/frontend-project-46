@@ -4,7 +4,12 @@ import parseFile from './parseFile.js';
 
 const getAbsPath = (fileName) => path.resolve(cwd(), fileName);
 
-const sortAscending = (arr) => arr.sort((a, b) => a.localeCompare(b));
+// .sort мутирует массив, поэтому его использовать в данном проекте нельзя
+const sortAscending = (arr) => arr.reduce((acc, str) => [
+  ...acc.filter((n) => n.localeCompare(str) <= 0),
+  str,
+  ...acc.filter((n) => n.localeCompare(str) > 0),
+], []);
 
 const makeTree = (obj1, obj2) => {
   const allKeys = sortAscending(Object.keys({ ...obj1, ...obj2 }));
